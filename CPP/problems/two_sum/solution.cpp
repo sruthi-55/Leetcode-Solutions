@@ -1,16 +1,13 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int> &nums, int target) {
-        unordered_map<int, int> visited;
-        int len = nums.size();
-        for (int i = 0; i < len; ++i) {
-            int n = nums[i];
-            int complement = target - n;
-            if (visited.count(complement)) {
-                return {visited[complement], i};
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> indices;
+        for (int i = 0; i < nums.size(); i++) {
+            if (indices.find(target - nums[i]) != indices.end()) {
+                return {indices[target - nums[i]], i};
             }
-            visited[n] = i;  // assume that each input would have exactly one solution
+            indices[nums[i]] = i;
         }
         return {};
     }
-}; 
+};
