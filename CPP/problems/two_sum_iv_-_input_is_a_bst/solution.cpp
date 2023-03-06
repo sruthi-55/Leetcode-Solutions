@@ -11,13 +11,21 @@
  */
 class Solution {
 public:
-    //should declare as global because all recursive calls use the same set
-    unordered_set<int> s;
     bool findTarget(TreeNode* root, int k) {
-        if(!root)   return false;
-        else if(s.count(k-root->val))   return true;
-        s.insert(root->val);
-        return findTarget(root->left,k) || findTarget(root->right,k);
+        vector<int> nums;
+        inorder(root, nums);
+        for(int i = 0, j = nums.size()-1; i<j;){
+            if(nums[i] + nums[j] == k)return true;
+            (nums[i] + nums[j] < k)? i++ : j--;
+        }
+        return false;
+    }
+    
+    void inorder(TreeNode* root, vector<int>& nums){
+        if(root == NULL)return;
+        inorder(root->left, nums);
+        nums.push_back(root->val);
+        inorder(root->right, nums);
     }
 };
 
