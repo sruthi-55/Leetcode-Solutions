@@ -1,11 +1,11 @@
 class Solution {
 public:
     void dfs(int cur,vector<int> &vis,vector<vector<int>>& edge){
-        // vis[cur]=1;
+        vis[cur]=1;
         int n=edge[0].size();
         for(int i=0; i<n; i++){
             if(!vis[i] && edge[cur][i]){
-                vis[i]=1;
+                // vis[i]=1;
                 dfs(i,vis,edge);
             }
         }
