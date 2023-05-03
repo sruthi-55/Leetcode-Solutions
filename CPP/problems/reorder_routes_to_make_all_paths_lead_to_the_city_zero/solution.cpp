@@ -5,7 +5,8 @@ public:
         vis[i]=1;
         for(auto it:adj[i]){
             if(!vis[abs(it)]){
-                count+=dfs(abs(it),adj,vis)+(it>0);
+                if(it>0)    count+=1+dfs(abs(it),adj,vis);
+                else    count+=dfs(abs(it),adj,vis);
             }
         }
         return count;
