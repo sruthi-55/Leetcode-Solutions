@@ -1,23 +1,25 @@
+class DSU {
+    vector<int> par, rank;
+public:
+    DSU(int n) : par(n), rank(n) {
+        iota(begin(par), end(par), 0);  
+    }
+    int find(int x) {
+        if(x == par[x]) return x;           
+        return find(par[x]);                
+    }
+    bool Union(int x, int y) {
+        auto xp = find(x), yp = find(y);
+        if(xp == yp) return false;   
+        return par[xp] = yp;  
+    }
+};
 class Solution {
 public:
-    bool dfs(int i,vector<vector<int>>& graph,vector<bool> &vis,int par=-1){
-        if(vis[i])  return true;
-        vis[i]=true;
-        for(auto nei:graph[i]){
-            if(nei!=par && dfs(nei,graph,vis,i))  return true;
-        }
-        return false;
-    }
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int n=edges.size();
-        vector<vector<int>> graph(n+1);
-        vector<bool> vis(n+1);
-        for(auto &ai: edges){
-            fill(begin(vis), end(vis), false);  
-            graph[ai[0]].push_back(ai[1]);
-            graph[ai[1]].push_back(ai[0]);
-            if(dfs(ai[0],graph,vis)) return ai;
-        }
-        return {};
+    vector<int> findRedundantConnection(vector<vector<int>>& e) {
+        DSU ds(size(e)+1);
+        for(auto& E : e) 
+            if(!ds.Union(E[0], E[1])) return E;	
+        return { };  
     }
 };
