@@ -3,10 +3,8 @@ public:
     void dfs(int i,vector<vector<int>> &res,vector<vector<int>> &graph,vector<int> &path){
         path.push_back(i);
         if(i==graph.size()-1)   res.push_back(path);
-        else{
-            for(auto it:graph[i]){
-                dfs(it,res,graph,path);
-            }
+        for(auto it:graph[i]){
+            dfs(it,res,graph,path);
         }
         path.pop_back();
     }
