@@ -17,8 +17,7 @@ public:
             if (x == prev) continue;
             people += dfs(x, i, graph,s);
         }
-        if( i!=0 )     ans+= (people + s - 1) / s;
+        if( i!=0 )     ans+=ceil( (double)people/s );
         return people;
     }
-
 };
