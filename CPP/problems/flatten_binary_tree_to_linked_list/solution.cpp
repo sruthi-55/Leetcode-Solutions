@@ -10,17 +10,18 @@
  * };
  */
 class Solution {
-public:
-    TreeNode *prev=NULL;    
+public:  
     void flatten(TreeNode* root) {
-        helper(root);
-    }
-    void helper(TreeNode* cur){
-        if(!cur)    return;
-        helper(cur->right);
-        helper(cur->left);
-        cur->right=prev;
-        cur->left=NULL;
-        prev=cur;
+        TreeNode *cur=root;
+        while(cur){
+            if(cur->left){
+                TreeNode *pre=cur->left;
+                while(pre->right)   pre=pre->right;
+                pre->right=cur->right;
+                cur->right=cur->left;
+                cur->left=NULL;
+            }
+            cur=cur->right;
+        }
     }
 };
