@@ -1,0 +1,3 @@
+class Solution(object):
+    def mostWordsFound(self, sentences):
+        return max(s.count(" ") for s in sentences)+1
