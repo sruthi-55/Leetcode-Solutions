@@ -4,10 +4,10 @@ public:
     int n = sentences.size();
     int max = 0;
 
-    for (int i = 0; i < n; i++) {
+    for (auto s:sentences) {
         int counter = 0;
-        for (int j = 0; j < sentences[i].size(); j++) {
-            if (sentences[i][j] == ' ') counter++;
+        for (auto c:s) {
+            if (c==' ') counter++;
         }
         if (max < counter) max = counter;
     }
