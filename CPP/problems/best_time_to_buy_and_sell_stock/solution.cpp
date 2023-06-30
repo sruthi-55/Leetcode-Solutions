@@ -1,13 +1,14 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& arr) {
+    int find(int i,int k,bool buy,vector<int> &arr,vector<vector<int>> &dp){
+        if(i>=arr.size()||k<=0)   return 0;
+        if(dp[i][buy]!=-1)    return dp[i][buy];
+        if(buy) return dp[i][buy]=max(-arr[i]+find(i+1,k,!buy,arr,dp), find(i+1,k,buy,arr,dp));
+        else    return dp[i][buy]=max(arr[i]+find(i+1,k-1,!buy,arr,dp), find(i+1,k,buy,arr,dp));
+    }
+    int maxProfit(vector<int>& arr){
         int n=arr.size();
-        int mini=arr[0];
-        int res=0;
-        for(int i=1;i<n;i++){
-            res=max(res,arr[i]-mini);
-            mini=min(mini,arr[i]);
-        }
-        return res;
+        vector<vector<int>> dp(n,vector<int>(2,-1));
+        return find(0,1,1,arr,dp);
     }
 };
