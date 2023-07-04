@@ -2,17 +2,18 @@ class Solution {
 public:
     string removeOuterParentheses(string s) {
         string res;
-        int opened=0;
+        stack<char> stack;
         for(char i: s){
-            //opened is not >0 but we need to increment opened
-            if(i=='(' && opened++>0){
-                res+=i;
+            if(i=='('){
+                if(!stack.empty())  res+='(';
+                stack.push('(');
             }
-            else if(i==')' && opened-->1){
-                res+=i;
+            else{
+                char c=stack.top();
+                stack.pop();
+                if(!stack.empty())  res+=')';
             }
         }
         return res;
-        
     }
 };
