@@ -6,7 +6,10 @@ public:
             if(i=='(' || i=='[' || i=='{'){
                 stack.push(i);
             }
-            else if(stack.empty() || (stack.top()=='(' && i!=')') || (stack.top()=='[' && i!=']') || (stack.top()=='{' && i!='}')){
+            else if(stack.empty() || 
+                    (stack.top()=='(' && i!=')') || 
+                    (stack.top()=='[' && i!=']') || 
+                    (stack.top()=='{' && i!='}')){
                 return false;
             }
             else    stack.pop();
