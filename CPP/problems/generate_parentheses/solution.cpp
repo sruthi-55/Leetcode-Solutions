@@ -2,18 +2,17 @@ class Solution {
 public:
     vector<string> generateParenthesis(int n) {
         vector<string> res;
-        addingPar(res,"",n,0);
+        addingPar(res,"",0,0,n);
         return res;
 
     }
-    void addingPar( vector<string> &res,string str,int n,int m){
-        //if there is no left parenthesis or right parenthesis to add
-        if(n==0 && m==0){
+    void addingPar( vector<string> &res,string str,int open,int close,int n){
+        if(open==n && close==n){
             res.push_back(str);
             return;
         }
-        if(n>0) addingPar(res,str+"(",n-1,m+1);
-        if(m>0) addingPar(res,str+")",n,m-1);
+        if(open<n) addingPar(res,str+"(",open+1,close,n);
+        if(close<open) addingPar(res,str+")",open,close+1,n);
 
     }
 };
