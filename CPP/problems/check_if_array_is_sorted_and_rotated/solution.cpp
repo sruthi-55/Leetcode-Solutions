@@ -7,7 +7,7 @@ public:
             if(arr[i]>arr[(i+1)%n]){
                c++;
             }
-            if(c>1)    return false;
+            if(c>1) return false;
         }
         return true;
     }
