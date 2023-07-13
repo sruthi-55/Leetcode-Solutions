@@ -1,15 +1,13 @@
 class Solution {
 public:
-    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
-        string a,b;
-        for(auto x:word1)
-            a += x;
-        for(auto x:word2)
-            b += x;
-       
-        if(a.compare(b)==0)
-            return 1;
-        
-        return 0;
+    bool arrayStringsAreEqual(vector<string>& s1, vector<string>& s2) {
+        string fullS1,fullS2;
+        for(auto s:s1){
+            fullS1+=s;
+        }
+        for(auto s:s2){
+            fullS2+=s;
+        }
+        return fullS1==fullS2;
     }
 };
