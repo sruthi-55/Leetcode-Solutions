@@ -21,7 +21,6 @@ public:
     void solve(string s,int minInv){
         if(m[s])    return;
         else    m[s]++;
-        if(minInv<0)    return;
         if(minInv==0){
             if(!getMinInvalid(s))
                 res.push_back(s);
