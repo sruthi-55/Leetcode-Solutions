@@ -1,28 +1,30 @@
 class Solution {
 public:
-    int scoreOfParentheses(string str) {
-        stack<int> s;
-        for(auto i:str){
-            if(i=='('){
-                s.push(-1);
-            }
+    int scoreOfParentheses(string s) {
+        //str --> ( () (()) )
+        //"(" --> -1
+        stack<int> stk;
+        for(auto ch:s){
+            if(ch=='(') stk.push(-1);
             else{
-                if(s.top()==-1){
-                    s.pop();
-                    s.push(1);
-                }
+                char lastCh = stk.top();
+                if(lastCh == -1){
+                    stk.pop(),stk.push(1);
+                }   
                 else{
                     int val=0;
-                    while(s.top()!=-1){
-                        val+=s.top();s.pop();
-                    }
-                    s.pop();
-                    s.push(2*val);
+                    while(!stk.empty() && stk.top()!=-1){
+                        val+=stk.top();
+                        stk.pop();
+                    }   
+                    stk.pop();
+                    stk.push(2*val);
                 }
             }
         }
         int val=0;
-        while(s.size()!=0)  val+=s.top(),s.pop();
+        while(!stk.empty())
+            val+=stk.top(),stk.pop();
         return val;
     }
 };
