@@ -11,8 +11,15 @@ public:
             res.push_back(str);
             return;
         }
-        if(open<n) addingPar(res,str+"(",open+1,close,n);
-        if(close<open) addingPar(res,str+")",open,close+1,n);
-
+        if(open<n){
+            str+="(";
+            addingPar(res,str,open+1,close,n);
+            str.pop_back();
+        } 
+        if(close<open){
+            str+=")";
+            addingPar(res,str,open,close+1,n);
+            str.pop_back();
+        } 
     }
 };
