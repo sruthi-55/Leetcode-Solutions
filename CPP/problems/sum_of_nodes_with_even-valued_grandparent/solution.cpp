@@ -11,12 +11,12 @@
  */
 class Solution {
 public:
-    int ans=0;
-    int sumEvenGrandparent(TreeNode* root,int p=1,int gp=1) {
+    int sumT=0;
+    int sumEvenGrandparent(TreeNode* root,int par=-1,int gPar=-1) {
         if(!root)   return 0;
-        int left=sumEvenGrandparent(root->left,root->val,p);
-        int right=sumEvenGrandparent(root->right,root->val,p);
-        if(gp%2==0) return left+right+root->val;
-        else return left+right;
+        if(gPar%2==0)   sumT+=root->val;
+        sumEvenGrandparent(root->left,root->val,par);
+        sumEvenGrandparent(root->right,root->val,par);
+        return sumT;
     }
 };
