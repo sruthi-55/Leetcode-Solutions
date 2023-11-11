@@ -12,31 +12,27 @@
 class Solution {
 public:
     unordered_map<int, vector<TreeNode*>> dp;
+    //full binary tree - has exactly 0 or 2 children
     vector<TreeNode*> allPossibleFBT(int n) {
-        if(n<1 || n%2==0)   return {};
-        if(dp[n].size()!=0) return dp[n];
         vector<TreeNode*> ans;
-        if(n==1){
-            ans.push_back(new TreeNode(0));
-        }
-        else{
-            for(int i=1;i<n;i+=2){
-                vector<TreeNode*> left=allPossibleFBT(i);
-                vector<TreeNode*> right=allPossibleFBT(n-i-1);
-                for(int i=0;i<left.size();i++){
-                    for(int j=0;j<right.size();j++){
-                        TreeNode* root=new TreeNode(0);
-                        root->left=left[i];
-                        root->right=right[j];
-                        ans.push_back(root);
-                    }
+        //left and right subtrees can have 1,3,5,7,9....
+        //if left have i nodes, then right will have n-i-1 ('cause 1 for root)
+        if(dp[n].size()!=0) return dp[n];
+        if(n%2==0)  return ans;
+        if(n==1)    ans.push_back(new TreeNode(0));
+        
+        for(int i=1;i<n;i+=2){
+            vector<TreeNode*> left = allPossibleFBT(i);
+            vector<TreeNode*> right = allPossibleFBT(n-i-1);
+            for(auto leftE:left){
+                for(auto rightE:right){
+                    TreeNode *root = new TreeNode(0);
+                    root->left=leftE;
+                    root->right=rightE;
+                    ans.push_back(root);
                 }
             }
         }
-        dp[n]=ans;
-        return ans;
+        return dp[n]=ans;
     }
 };
-
-
-
