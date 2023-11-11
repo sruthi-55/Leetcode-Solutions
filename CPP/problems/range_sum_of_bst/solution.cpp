@@ -11,21 +11,12 @@
  */
 class Solution {
 public:
-    int rangeSumBST(TreeNode* root, int l, int h) {
+    int rangeSumBST(TreeNode* root, int low, int high) {
         if(!root)   return 0;
-        int ans=0;
-        stack<TreeNode*> s;
-        s.push(root);
-        while(!s.empty()){
-            TreeNode* node=s.top();
-            s.pop();
-            if(node->val>=l && node->val<=h){
-                ans+=node->val;
-            } 
-            if(node->left && node->val>=l)  s.push(node->left);
-            if(node->right && node->val<=h) s.push(node->right);
-        }
-        return ans;
+        int sum=0;
+        if(root->val>=low && root->val<=high)   sum+=root->val;
+        if(root->val>low)   sum+=rangeSumBST(root->left,low,high);
+        if(root->val<high)  sum+=rangeSumBST(root->right,low,high);
+        return sum;
     }
-    
 };
